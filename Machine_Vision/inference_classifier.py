@@ -12,16 +12,18 @@ letters_dict = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 
                 20: 'V', 21: 'W', 22: 'X', 23: 'Y', 24: 'Z'}
 
 
-def Write_text(text):
+def write_text(text):
     pyautogui.write(text)
 
-def main(type):
-    file = './modelWords.p'
-    labels_dict = words_dict
+def main():
+    # file = './modelWords.p'
+    # labels_dict = words_dict
+    file = './model.p'
+    labels_dict = letters_dict
 
-    if type != 0:
-        file = './model.p'
-        labels_dict = letters_dict
+    # if type != 0:
+    #     file = './model.p'
+    #     labels_dict = letters_dict
 
     print(file, labels_dict)
     model_dict = pickle.load(open(file, 'rb'))
@@ -84,7 +86,7 @@ def main(type):
             predicted_character = labels_dict[int(prediction[0])]
 
             print(predicted_character)
-            Write_text(predicted_character)
+            write_text(predicted_character)
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
             cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 3,
@@ -98,4 +100,4 @@ def main(type):
 
 
 if __name__ == "__main__":
-    main(type)
+    main()
